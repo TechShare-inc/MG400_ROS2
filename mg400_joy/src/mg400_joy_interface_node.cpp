@@ -14,7 +14,7 @@
 
 
 #include "mg400_joy/mg400_joy_interface_node.hpp"
-
+#include "rclcpp/callback_group.hpp"
 namespace mg400_joy
 {
 MG400JoyInterfaceNode::MG400JoyInterfaceNode(const rclcpp::NodeOptions & node_options)
@@ -38,10 +38,12 @@ MG400JoyInterfaceNode::MG400JoyInterfaceNode(const rclcpp::NodeOptions & node_op
   this->p9n_if_ =
     std::make_unique<p9n_interface::PlayStationInterface>(this->hw_type_);
 
+  // this->callback_group_ = this->create_callback_group(
+  //   rclcpp::CallbackGroupType::MutuallyExclusive, false);
   this->callback_group_ = this->create_callback_group(
-    rclcpp::CallbackGroupType::MutuallyExclusive, false);
-  this->callback_group_executor_.add_callback_group(
-    this->callback_group_, this->get_node_base_interface());
+    rclcpp::CallbackGroupType::MutuallyExclusive);
+  // this->callback_group_executor_.add_callback_group(
+  //   this->callback_group_, this->get_node_base_interface());
 
   this->mg400_reset_robot_clnt_ =
     this->create_client<mg400_msgs::srv::ResetRobot>(
