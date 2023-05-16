@@ -90,6 +90,14 @@ bool RealtimeFeedbackTcpInterface::getRobotMode(uint64_t & mode)
   }
 }
 
+void RealtimeFeedbackTcpInterface::getToolVectorActual(double* val)
+{
+    this->mutex_current_joints_.lock();
+    memcpy(val, this->tool_vector_, sizeof(this->tool_vector_));
+    this->mutex_current_joints_.unlock();
+}
+
+
 bool RealtimeFeedbackTcpInterface::isRobotMode(const uint64_t & expected_mode)
 {
   std::shared_ptr<RealTimeData> rt_data_local_ = this->getRealtimeData();
@@ -148,6 +156,7 @@ void RealtimeFeedbackTcpInterface::recvData()
       for (uint64_t i = 0; i < this->current_joints_.size(); ++i) {
         this->current_joints_[i] = this->getRealtimeData()->q_actual[i] * TO_RADIAN;
       }
+      memcpy(this->tool_vector_, this->tool_vector_actual, sizeof(this->tool_vector_));
       this->mutex_current_joints_.unlock();
     } catch (const TcpSocketException & err) {
       this->tcp_socket_->disConnect();
