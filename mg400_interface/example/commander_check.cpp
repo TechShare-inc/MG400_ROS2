@@ -27,7 +27,7 @@ private:
 public:
   explicit CommanderCheckNode(const rclcpp::NodeOptions & options)
   : Node("commander_check_node", options),
-    ip_address(this->declare_parameter("ip_address", "127.0.0.1"))
+    ip_address(this->declare_parameter("ip_address", "192.168.1.6"))
   {
     this->interface = std::make_unique<mg400_interface::MG400Interface>(
       this->ip_address);
@@ -46,6 +46,10 @@ public:
   bool deactivate()
   {
     return this->interface->deactivate();
+  }
+
+  double degreeToRadian(double degree) {
+    return degree * (M_PI / 180.0);
   }
 };
 
@@ -71,15 +75,23 @@ int main(int argc, char ** argv)
     ck_node->interface->dashboard_commander->tool(0);
     rclcpp::sleep_for(2s);
 
-    ck_node->interface->motion_commander->movJ(
-      0.35, 0.0, 0.0, 0.0, 0.0, 0.0);
+    // ck_node->interface->motion_commander->movJ(
+    //   0.35, 0.0, 0.0, 0.0, 0.0, 0.0);
+    // rclcpp::sleep_for(2s);
+
+    // ck_node->interface->dashboard_commander->tool(1);
+    // rclcpp::sleep_for(2s);
+
+    // ck_node->interface->motion_commander->movJ(
+    //   0.35, 0.0, 0.0, 0.0, 0.0, 0.0);
+    // rclcpp::sleep_for(2s);
+
+    ck_node->interface->motion_commander->mov_4axis(
+      0.35, 0.0, 0.0, 0.0);
     rclcpp::sleep_for(2s);
 
-    ck_node->interface->dashboard_commander->tool(1);
-    rclcpp::sleep_for(2s);
-
-    ck_node->interface->motion_commander->movJ(
-      0.35, 0.0, 0.0, 0.0, 0.0, 0.0);
+    ck_node->interface->motion_commander->mov_4axis(
+      0.35, 0.0, 0.0, ck_node->degreeToRadian(30));
     rclcpp::sleep_for(2s);
 
     ck_node->interface->dashboard_commander->disableRobot();

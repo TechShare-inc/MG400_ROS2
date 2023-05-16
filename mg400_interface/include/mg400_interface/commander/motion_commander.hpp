@@ -52,6 +52,10 @@ public:
     const si_m, const si_m, const si_m,
     const si_rad, const si_rad = 0.0, const si_rad = 0.0);
 
+  void mov_4axis(
+    const si_m x, const si_m y, const si_m z,
+    const si_rad);
+    
   void movL(
     const si_m, const si_m, const si_m,
     const si_rad, const si_rad = 0.0, const si_rad = 0.0);

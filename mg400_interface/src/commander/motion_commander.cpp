@@ -35,6 +35,20 @@ void MotionCommander::movJ(
   this->tcp_if_->sendCommand(buf);
 }
 
+void MotionCommander::mov_4axis(
+  const si_m x, const si_m y, const si_m z,
+  const si_rad r)
+{
+  char buf[100];
+  snprintf(
+    buf, sizeof(buf),
+    "MovJ(%.3lf,%.3lf,%.3lf,%.3lf)",
+    m2mm(x), m2mm(y), m2mm(z),
+    rad2degree(r));
+  this->tcp_if_->sendCommand(buf);
+}
+
+
 void MotionCommander::movL(
   const si_m x, const si_m y, const si_m z,
   const si_rad rx, const si_rad ry, const si_rad rz)
