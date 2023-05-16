@@ -2,25 +2,12 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>mg400_node</name>
-  <version>1.2.3</version>
-  <description>MG400 Node Package.</description>
-  <maintainer email="m12watanabe1a@gmail.com">m12watanabe1a</maintainer>
-  <license>Apache License 2.0</license>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="root@todo.todo">root</maintainer>
+  <license>TODO: License declaration</license>
 
-  <buildtool_depend>ament_cmake_auto</buildtool_depend>
-
-  <depend>rclcpp</depend>
-  <depend>rclcpp_components</depend>
-  <depend>rclcpp_action</depend>
-  <depend>sensor_msgs</depend>
-  <depend>mg400_msgs</depend>
-  <depend>mg400_interface</depend>
-  <depend>mg400_plugin_base</depend>
-
-  <exec_depend>mg400_plugin</exec_depend>
-
-  <build_depend>qtbase5-dev</build_depend>
-  <build_depend>qt5-qmake</build_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
