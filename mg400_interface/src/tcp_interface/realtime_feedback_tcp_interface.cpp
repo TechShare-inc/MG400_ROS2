@@ -155,6 +155,7 @@ void RealtimeFeedbackTcpInterface::recvData()
       this->mutex_current_joints_.lock();
       for (uint64_t i = 0; i < this->current_joints_.size(); ++i) {
         this->current_joints_[i] = this->getRealtimeData()->q_actual[i] * TO_RADIAN;
+        RCLCPP_INFO("update the current joints");
       }
       memcpy(this->tool_vector_, this->tool_vector_actual, sizeof(this->tool_vector_));
       this->mutex_current_joints_.unlock();
