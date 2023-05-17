@@ -40,7 +40,7 @@ void MotionCommander::mov_4axis(
   const si_rad r)
 {
   char buf[100];
-  snprintf(
+  snprintf( 
     buf, sizeof(buf),
     "MovJ(%.3lf,%.3lf,%.3lf,%.3lf)",
     m2mm(x), m2mm(y), m2mm(z),
