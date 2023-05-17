@@ -156,7 +156,7 @@ void RealtimeFeedbackTcpInterface::recvData()
       for (uint64_t i = 0; i < this->current_joints_.size(); ++i) {
         this->current_joints_[i] = this->getRealtimeData()->q_actual[i] * TO_RADIAN;
       }
-      memcpy(this->tool_vector_, this->rt_data_ ->tool_vector_actual, sizeof(this->tool_vector_));
+      memcpy(this->tool_vector_, this->rt_data_->tool_vector_actual, sizeof(this->tool_vector_));
       this->mutex_current_joints_.unlock();
     } catch (const TcpSocketException & err) {
       this->tcp_socket_->disConnect();

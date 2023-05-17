@@ -38,7 +38,6 @@ public:
 private:
   using Pose = geometry_msgs::msg::Pose;
   const uint16_t PORT_ = 30004;
-  double tool_vector_actual[6];  
   double tool_vector_[6];
   std::mutex mutex_current_joints_;
   std::mutex mutex_rt_data_;
